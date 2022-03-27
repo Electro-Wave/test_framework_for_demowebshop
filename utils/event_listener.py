@@ -3,16 +3,8 @@ from selenium.webdriver.support.event_firing_webdriver import AbstractEventListe
 
 
 class MyListener(AbstractEventListener):
-    def before_find(self, by, value, driver):
-        with allure.step(f'нашел элемент {value}'):
-            pass
-
-    def after_click(self, element, driver):
-        with allure.step(f'кликаю по элементу {element}'):
-            pass
 
     def on_exception(self, exception, driver):
-        print(f'выбрасываю исключение {exception}')
         allure.attach(driver.get_screenshot_as_png(),
                       driver.session_id,
                       allure.attachment_type.PNG
