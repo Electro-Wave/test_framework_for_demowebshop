@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
@@ -24,19 +25,25 @@ class CheckoutPage(BasePage):
     SECTION_ORDER_COMPLETED = (By.CSS_SELECTOR, '.order-completed')
 
     def click_button_continue(self, index=0):
-        self._find_elements(self.CONTINUE_BUTTON)[index].click()
+        with allure.step('Нажимаю на кнопку continue'):
+            self._find_elements(self.CONTINUE_BUTTON)[index].click()
 
     def click_checkbox_in_store_pickup(self):
-        self._click(self.IN_STORE_PICKUP_CHECKBOX)
+        with allure.step('Нажимаю на кнопку in store pickup'):
+            self._click(self.IN_STORE_PICKUP_CHECKBOX)
 
     def click_purchase_order(self):
-        self._click(self.PURCHASE_ORDER)
+        with allure.step('Нажимаю на кнопку purchase order'):
+            self._click(self.PURCHASE_ORDER)
 
     def input_number_order(self, value):
-        self._input(self.PURCHASE_ORDER_NUMBER_FIELD, value)
+        with allure.step(f'Ввожу в поле purchase order number: {value}'):
+            self._input(self.PURCHASE_ORDER_NUMBER_FIELD, value)
 
     def should_be_confirm_order(self):
-        self._is_present(self.CONFIRM_ORDER_FORM)
+        with allure.step('Провеяю подтверждение заказа'):
+            self._is_present(self.CONFIRM_ORDER_FORM)
 
     def should_be_order_completed(self):
-        self._is_present(self.SECTION_ORDER_COMPLETED)
+        with allure.step('Проверяю успешную обработку закакза'):
+            self._is_present(self.SECTION_ORDER_COMPLETED)

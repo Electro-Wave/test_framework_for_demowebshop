@@ -1,3 +1,4 @@
+import allure
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
 
@@ -24,32 +25,46 @@ class CartPage(BasePage):
         self._amount_of_elements_with_class_name(self.CART_ITEM_ROW, amount)
 
     def should_be_empty_cart(self):
-        assert self._get_text(self.EMPTY_ORDER_SUMMARY_CONTENT) == 'Your Shopping Cart is empty!'
-        self._is_not_present(self.FORM_ORDER_SUMMARY_CONTENT)
+        with allure.step("Проверяю наличие пустой корзины"):
+            assert self._get_text(self.EMPTY_ORDER_SUMMARY_CONTENT) == 'Your Shopping Cart is empty!'
+            self._is_not_present(self.FORM_ORDER_SUMMARY_CONTENT)
 
     def should_be_form_order_summary(self):
-        self._is_present(self.FORM_ORDER_SUMMARY_CONTENT)
+        with allure.step('Проверяю наличие формы заказа'):
+            self._is_present(self.FORM_ORDER_SUMMARY_CONTENT)
 
     def click_link_edit_product(self):
-        self._click(self.LINK_EDIT)
+        with allure.step('Нажимаю на кнопку Edit'):
+            self._click(self.LINK_EDIT)
 
     def click_checkbox_remove(self):
-        self._click(self.REMOVE_FROM_CART_CHECKBOX)
+        with allure.step('Нажимаю на чекбокс remove'):
+            self._click(self.REMOVE_FROM_CART_CHECKBOX)
 
     def click_button_update_cart(self):
-        self._click(self.UPDATE_CART_BUTTON)
+        with allure.step('Нажимаю на кнопку update'):
+            self._click(self.UPDATE_CART_BUTTON)
 
     def click_button_continue_shopping(self):
-        self._click(self.CONTINUE_SHOPPING_BUTTON)
+        with allure.step('Нажимаю на кнопку continue shopping'):
+            self._click(self.CONTINUE_SHOPPING_BUTTON)
 
     def click_button_checkout(self):
-        self._click(self.CHECKOUT_BUTTON)
+        with allure.step('Нажимаю на кнопку chekout'):
+            self._click(self.CHECKOUT_BUTTON)
 
-    def click_terms__of_service_checkbox(self):
-        self._click(self.TERMS_OF_SERVICE_CHECKBOX)
+    def click_terms_of_service_checkbox(self):
+        with allure.step('Нажимаю на чекбокс terms of service'):
+            self._click(self.TERMS_OF_SERVICE_CHECKBOX)
 
     def click_product_name(self):
-        self._click(self.PRODUCT_NAME)
+        with allure.step('Нажимаю на ссылку наименование товара'):
+            self._click(self.PRODUCT_NAME)
 
     def input_field_qty(self, value):
-        self._input(self.QTY_FILED, value)
+        with allure.step(f'Ввожу в поле qty: {value}'):
+            self._input(self.QTY_FILED, value)
+
+    def check_change_price(self, expected_price: float):
+        total_price = float(self._get_text(self.TOTAL))
+        assert total_price == expected_price, f'expected price {expected_price} got {total_price}'

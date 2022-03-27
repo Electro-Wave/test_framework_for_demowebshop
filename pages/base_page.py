@@ -30,7 +30,7 @@ class BasePage:
     def _is_not_present(self, locator):
         try:
             if self._driver.find_element(*locator).is_displayed():
-                raise AssertionError(f"element {locator} found on page visible but it shouldn't be")
+                raise AssertionError(f'element {locator} found on page visible but it shouldn t be')
         except NoSuchElementException:
             return True
 
@@ -54,7 +54,7 @@ class BasePage:
         if len(elements) == amount:
             return elements
         else:
-            raise AssertionError(f"expected amount {amount} got {len(elements)}")
+            raise AssertionError(f'expected amount {amount} got {len(elements)}')
 
     def _find_elements(self, locator):
         try:
