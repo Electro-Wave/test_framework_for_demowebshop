@@ -1,4 +1,4 @@
-![Build Status](http://51.250.21.12:8080/buildStatus/icon?job=test_demoshop)
+![Build Status](http://51.250.20.53:8080/buildStatus/icon?job=test_demoshop)
 
 
 
